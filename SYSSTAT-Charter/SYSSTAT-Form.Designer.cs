@@ -30,6 +30,7 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gbChart = new System.Windows.Forms.GroupBox();
+            this.cbUTC = new System.Windows.Forms.CheckBox();
             this.bExport = new System.Windows.Forms.Button();
             this.gbReports = new System.Windows.Forms.GroupBox();
             this.cbMouseOver = new System.Windows.Forms.CheckBox();
@@ -42,7 +43,6 @@
             this.bOpenDir = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.cbUTC = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -77,6 +77,17 @@
             this.gbChart.TabIndex = 0;
             this.gbChart.TabStop = false;
             this.gbChart.Text = "Chart";
+            // 
+            // cbUTC
+            // 
+            this.cbUTC.AutoSize = true;
+            this.cbUTC.Location = new System.Drawing.Point(17, 32);
+            this.cbUTC.Name = "cbUTC";
+            this.cbUTC.Size = new System.Drawing.Size(100, 19);
+            this.cbUTC.TabIndex = 2;
+            this.cbUTC.Text = "UTC DateTime";
+            this.cbUTC.UseVisualStyleBackColor = true;
+            this.cbUTC.CheckedChanged += new System.EventHandler(this.CbUTC_CheckedChanged);
             // 
             // bExport
             // 
@@ -194,17 +205,6 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "jpg files|*.jpg";
-            // 
-            // cbUTC
-            // 
-            this.cbUTC.AutoSize = true;
-            this.cbUTC.Location = new System.Drawing.Point(17, 32);
-            this.cbUTC.Name = "cbUTC";
-            this.cbUTC.Size = new System.Drawing.Size(100, 19);
-            this.cbUTC.TabIndex = 2;
-            this.cbUTC.Text = "UTC DateTime";
-            this.cbUTC.UseVisualStyleBackColor = true;
-            this.cbUTC.CheckedChanged += new System.EventHandler(this.CbUTC_CheckedChanged);
             // 
             // SYSSTAT_Form
             // 

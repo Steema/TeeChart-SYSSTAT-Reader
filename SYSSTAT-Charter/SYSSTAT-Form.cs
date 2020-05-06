@@ -66,7 +66,10 @@ namespace SYSSTATS_Charter
 
                 if (index > -1 && index != _oldIndex)
                 {
-                    _toolTip.Show(DocumentationReader.GetSummary(cbReportTypes.SelectedItem.ToString(), _tChart1[index].Title, _reports), this, p, 3000);
+                    var title = _tChart1[index].Title;
+                    title = title.Substring(0, title.IndexOf("(") - 1);
+
+                    _toolTip.Show(DocumentationReader.GetSummary(cbReportTypes.SelectedItem.ToString(), title, _reports), this, p, 3000);
                     _oldIndex = index;
                 }
                 else if (index == -1)
