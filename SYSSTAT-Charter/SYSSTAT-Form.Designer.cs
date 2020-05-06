@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.gbChart = new System.Windows.Forms.GroupBox();
             this.bExport = new System.Windows.Forms.Button();
             this.gbReports = new System.Windows.Forms.GroupBox();
             this.cbMouseOver = new System.Windows.Forms.CheckBox();
@@ -41,9 +42,11 @@
             this.bOpenDir = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.cbUTC = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.gbChart.SuspendLayout();
             this.gbReports.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +58,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.bExport);
+            this.splitContainer1.Panel1.Controls.Add(this.gbChart);
             this.splitContainer1.Panel1.Controls.Add(this.gbReports);
             this.splitContainer1.Panel1.Controls.Add(this.bOpenDir);
             this.splitContainer1.Size = new System.Drawing.Size(1205, 665);
@@ -63,10 +66,21 @@
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.Text = "splitContainer1";
             // 
+            // gbChart
+            // 
+            this.gbChart.Controls.Add(this.cbUTC);
+            this.gbChart.Controls.Add(this.bExport);
+            this.gbChart.Enabled = false;
+            this.gbChart.Location = new System.Drawing.Point(25, 241);
+            this.gbChart.Name = "gbChart";
+            this.gbChart.Size = new System.Drawing.Size(358, 100);
+            this.gbChart.TabIndex = 0;
+            this.gbChart.TabStop = false;
+            this.gbChart.Text = "Chart";
+            // 
             // bExport
             // 
-            this.bExport.Enabled = false;
-            this.bExport.Location = new System.Drawing.Point(252, 250);
+            this.bExport.Location = new System.Drawing.Point(217, 60);
             this.bExport.Name = "bExport";
             this.bExport.Size = new System.Drawing.Size(131, 23);
             this.bExport.TabIndex = 1;
@@ -181,6 +195,17 @@
             // 
             this.saveFileDialog1.Filter = "jpg files|*.jpg";
             // 
+            // cbUTC
+            // 
+            this.cbUTC.AutoSize = true;
+            this.cbUTC.Location = new System.Drawing.Point(17, 32);
+            this.cbUTC.Name = "cbUTC";
+            this.cbUTC.Size = new System.Drawing.Size(100, 19);
+            this.cbUTC.TabIndex = 2;
+            this.cbUTC.Text = "UTC DateTime";
+            this.cbUTC.UseVisualStyleBackColor = true;
+            this.cbUTC.CheckedChanged += new System.EventHandler(this.CbUTC_CheckedChanged);
+            // 
             // SYSSTAT_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -193,6 +218,8 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.gbChart.ResumeLayout(false);
+            this.gbChart.PerformLayout();
             this.gbReports.ResumeLayout(false);
             this.gbReports.PerformLayout();
             this.ResumeLayout(false);
@@ -214,6 +241,8 @@
         private System.Windows.Forms.CheckBox cbMouseOver;
         private System.Windows.Forms.Button bExport;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.GroupBox gbChart;
+        private System.Windows.Forms.CheckBox cbUTC;
     }
 }
 

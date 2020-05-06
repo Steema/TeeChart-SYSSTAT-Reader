@@ -30,14 +30,29 @@ namespace SYSSTATS_Charter
             _tChart1.Axes.Bottom.Labels.DateTimeFormat = "g";
             _tChart1.Axes.Right.Grid.Transparency = 50;
             _tChart1.Axes.Right.Grid.Style = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            _tChart1.Axes.Right.Title.Font = _tChart1.Axes.Bottom.Title.Font;
             _tChart1.Axes.Right.Title.Text = "% Percentage";
             _tChart1.Axes.Right.Title.Angle = 90;
             _tChart1.Zoom.Direction = ZoomDirections.Horizontal;
             _tChart1.Panning.Allow = ScrollModes.Horizontal;
             _tChart1.Legend.CheckBoxes = true;
+            _tChart1.Legend.Symbol.WidthUnits = LegendSymbolSize.Pixels;
+            _tChart1.Legend.FontSeriesColor = true;
             _tChart1.MouseMove += _tChart1_MouseMove;
+            _tChart1.AfterDraw += _tChart1_AfterDraw;
+            _tChart1.Visible = false;
 
             splitContainer1.Panel2.Controls.Add(_tChart1);
+        }
+
+        private void _tChart1_AfterDraw(object sender, Graphics3D g)
+        {
+            if(_tChart1.Series.Count > 0)
+            {
+                g.Font = _tChart1.Legend.Font;
+                g.Font.Color = _tChart1.Header.Color;
+                g.TextOut(_tChart1.Legend.Left + _tChart1.Legend.Symbol.Width * 2, _tChart1.Legend.Top - 20, "(min; max values)");
+            }
         }
 
         private void _tChart1_MouseMove(object sender, MouseEventArgs e)
@@ -78,7 +93,8 @@ namespace SYSSTATS_Charter
             FillReportTypes();
 
             gbReports.Enabled = true;
-            bExport.Enabled = true;
+            gbChart.Enabled = true;
+            _tChart1.Visible = true;
         }
 
         private void FillReportTypes()
@@ -159,17 +175,30 @@ namespace SYSSTATS_Charter
             void AddSeries(string tag)
             {
                 var actualValues = first.HasFilter() ? values.Where(x => x.FilterValue == wantedFilter) : values;
+                IEnumerable<DateTime> dates;
 
-                var dates = actualValues.Select(x => x.TimeStamp).Select(y => y.LocalDateTime);
+                if(cbUTC.Checked)
+                {
+                    dates = actualValues.Select(x => x.TimeStamp).Select(y => y.UtcDateTime);
+                    _tChart1.Axes.Bottom.Title.Text = "UTC DateTime";
+                }
+                else
+                {
+                    dates = actualValues.Select(x => x.TimeStamp).Select(y => y.LocalDateTime);
+                    _tChart1.Axes.Bottom.Title.Text = "Local DateTime";
+                }
+
                 var valors = actualValues.Select(x => x.GetValue(tag));
 
                 if (!cbNonZero.Checked || !valors.All(x => x == 0.0))
                 {
+                    var minMax = $" ({valors.Min()}; {valors.Max()})";
+
                     if (cbUseBarSeries.Checked)
                     {
                         var bar = new Bar(_tChart1.Chart)
                         {
-                            Title = tag
+                            Title = tag + minMax
                         };
 
                         bar.XValues.DateTime = true;
@@ -186,7 +215,7 @@ namespace SYSSTATS_Charter
                     {
                         var line = new Line(_tChart1.Chart)
                         {
-                            Title = tag
+                            Title = tag + minMax
                         };
 
                         line.LinePen.Style = (System.Drawing.Drawing2D.DashStyle)(_tChart1.Series.Count % 4);
@@ -273,6 +302,11 @@ namespace SYSSTATS_Charter
             {
                 _tChart1.Export.Image.JPEG.Save(saveFileDialog1.FileName);
             }
+        }
+
+        private void CbUTC_CheckedChanged(object sender, EventArgs e)
+        {
+            DoSelection(false);
         }
     }
 }
