@@ -1,0 +1,713 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SYSSTAT-Charter</name>
+    </assembly>
+    <members>
+        <member name="M:SYSSTATS_Charter.Program.Main">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:SYSSTATS_Charter.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.Properties.Resources.SYSSTAT_Charter">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+            &lt;doc&gt;
+                &lt;assembly&gt;
+                    &lt;name&gt;SYSSTAT-Charter&lt;/name&gt;
+                &lt;/assembly&gt;
+                &lt;members&gt;
+                    &lt;member name=&quot;M:SYSSTATS_Charter.Program.Main&quot;&gt;
+                        &lt;summary&gt;
+                         The main entry point for the application.
+                        &lt;/summary&gt;
+                    &lt;/member&gt;
+                    &lt;member name=&quot;T:SYSSTATS_Charter.Properties.Resources&quot;&gt;
+                        &lt;summary&gt;
+                          A strongly-typed resource class, for looking up localized strings, etc.
+                        &lt;/summary&gt;
+                    &lt;/member&gt;
+             [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.Tps">
+            <summary>
+            Total number of transfers per second that were issued to physical devices.  A transfer is an I/O request to a physical device. 
+            Multiple logical requests can be combined into a single I/O request to the device.  A transfer is of indeterminate size.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.RkBPerSec">
+            <summary>
+            Number of kilobytes read from the device per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.WkBPerSec">
+            <summary>
+            Number of kilobytes written to the device per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.DkBPerSec">
+            <summary>
+            Number of kilobytes discarded for the device per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.Areqsz">
+            <summary>
+            The average size (in kilobytes) of the I/O requests that were issued to the device. Note: In previous versions, this field was known as avgrq-sz and was expressed in sectors.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.Aqusz">
+            <summary>
+            The average queue length of the requests that were issued to the device. Note: In previous versions, this field was known as avgqu-sz.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.Await">
+            <summary>
+            The average time (in milliseconds) for I/O requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.BlockDeviceActivity.Util">
+            <summary>
+            Percentage of elapsed time during which I/O requests were issued to the device (bandwidth utilization for the device). 
+            Device saturation occurs when this value is close to 100% for devices serving requests serially. 
+            But for devices serving requests in parallel, such as RAID arrays and modern SSDs, this number does not reflect their performance limits.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Usr">
+            <summary>
+            Percentage of CPU utilization that occurred while executing at the user level (application). Note that this field does NOT include time spent running virtual processors.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Nice">
+            <summary>
+            Percentage of CPU utilization that occurred while executing at the user level with nice priority.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.System">
+            <summary>
+            Percentage of CPU utilization that occurred while executing at the system level (kernel). Note that this field includes time spent servicing hardware and software interrupts.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Sys">
+            <summary>
+            Percentage of CPU utilization that occurred while executing at the system level (kernel). Note that this field does NOT include time spent servicing hardware or software interrupts.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.IOWait">
+            <summary>
+            Percentage of time that the CPU or CPUs were idle during which the system had an outstanding disk I/O request.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Steal">
+            <summary>
+            Percentage of time spent in involuntary wait by the virtual CPU or CPUs while the hypervisor was servicing another virtual processor.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.IRQ">
+            <summary>
+            Percentage of time spent by the CPU or CPUs to service hardware interrupts.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Soft">
+            <summary>
+            Percentage of time spent by the CPU or CPUs to service software interrupts.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Guest">
+            <summary>
+            Percentage of time spent by the CPU or CPUs to run a virtual processor.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Gnice">
+            <summary>
+            Percentage of time spent by the CPU or CPUs to run a niced guest.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.CPUUtilization.Idle">
+            <summary>
+            Percentage of time that the CPU or CPUs were idle and the system did not have an outstanding disk I/O request.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.HugePagesUtilization.Kbhugfree">
+            <summary>
+            Amount of hugepages memory in kilobytes that is not yet allocated.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.HugePagesUtilization.Kbhugused">
+            <summary>
+            Amount of hugepages memory in kilobytes that has been allocated.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.HugePagesUtilization.Hugused">
+            <summary>
+            Percentage of total hugepages memory that has been allocated.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.HugePagesUtilization.Kbhugrsvd">
+            <summary>
+            Amount of reserved hugepages memory in kilobytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.HugePagesUtilization.Kbhugsurp">
+            <summary>
+            Amount of surplus hugepages memory in kilobytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.KernelTablesStatus.Dentunusd">
+            <summary>
+            Number of unused cache entries in the directory cache.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.KernelTablesStatus.FileNum">
+            <summary>
+            Number of file handles used by the system.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.KernelTablesStatus.InodeNum">
+            <summary>
+            Number of inode handlers used by the system.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.KernelTablesStatus.PtyNum">
+            <summary>
+            Number of pseudo-terminals used by the system.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbmemfree">
+            <summary>
+            Amount of free memory available in kilobytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbavail">
+            <summary>
+            Estimate of how much memory in kilobytes is available for starting new applications, without swapping.  
+            The estimate takes into account that the system needs some page cache to function well, and that not all reclaimable slab will be reclaimable, due to items being in use. 
+            The impact of those factors will vary from system to system.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbmemused">
+            <summary>
+            Amount of used memory in kilobytes (calculated as total installed memory - kbmemfree - kbbuffers - kbcached - kbslab).
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Memused">
+            <summary>
+            Percentage of used memory.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbbuffers">
+            <summary>
+            Amount of memory used as buffers by the kernel in kilobytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbcached">
+            <summary>
+            Amount of memory used to cache data by the kernel in kilobytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbcommit">
+            <summary>
+            Amount of memory in kilobytes needed for current workload. This is an estimate of how much RAM/swap is needed to guarantee that there never is out of memory.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Commit">
+            <summary>
+            Percentage of memory needed for current workload in relation to the total amount of memory (RAM+swap). This number may be greater than 100% because the kernel usually overcommits memory.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbactive">
+            <summary>
+            Amount of active memory in kilobytes (memory that has been used more recently and usually not reclaimed unless absolutely necessary).
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbinact">
+            <summary>
+            Amount of inactive memory in kilobytes (memory which has been less recently used. It is more eligible to be reclaimed for other purposes).
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbdirty">
+            <summary>
+            Amount of memory in kilobytes waiting to get written back to the disk.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbanonpg">
+            <summary>
+            Amount of non-file backed pages in kilobytes mapped into userspace page tables.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbslab">
+            <summary>
+            Amount of memory in kilobytes used by the kernel to cache data structures for its own use.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbkstack">
+            <summary>
+            Amount of memory in kilobytes used for kernel stack space.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbpgtbl">
+            <summary>
+            Amount of memory in kilobytes dedicated to the lowest level of page tables.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.MemoryUtilization.Kbvmused">
+            <summary>
+            Amount of memory in kilobytes of used virtual address space.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.RxerrPerSec">
+            <summary>
+            Total number of bad packets received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.TxerrPerSec">
+            <summary>
+            Total number of errors that happened per second while transmitting packets.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.CollPerSec">
+            <summary>
+            Number of collisions that happened per second while transmitting packets.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.RxdropPerSec">
+            <summary>
+            Number of received packets dropped per second because of a lack of space in linux buffers.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.TxdropPerSec">
+            <summary>
+            Number of transmitted packets dropped per second because of a lack of space in linux buffers.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.TxcarrPerSEc">
+            <summary>
+            Number of carrier-errors that happened per second while transmitting packets.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.RxframPerSec">
+            <summary>
+            Number of frame alignment errors that happened per second on received packets.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.RxfifoPerSec">
+            <summary>
+            Number of FIFO overrun errors that happened per second on received packets.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkErrors.TxfifoPerSec">
+            <summary>
+            Number of FIFO overrun errors that happened per second on transmitted packets.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.IFACE">
+            <summary>
+            Name of the network interface for which statistics are reported.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.RxpckPerSec">
+            <summary>
+            Total number of packets received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.TxpckPerSec">
+            <summary>
+            Total number of packets transmitted per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.RxkBPerSec">
+            <summary>
+            Total number of kilobytes received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.TxkBPerSec">
+            <summary>
+            Total number of kilobytes transmitted per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.RxcmpPerSec">
+            <summary>
+            Number of compressed packets received per second (for cslip etc.).
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.TxcmpPerSEc">
+            <summary>
+            Number of compressed packets transmitted per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.RxmcstPerSec">
+            <summary>
+            Number of multicast packets received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NetworkStatistics.Ifutil">
+            <summary>
+            Utilization percentage of the network interface. For half-duplex interfaces, utilization is calculated using the sum of rxkB/s and txkB/s as a percentage of the interface speed. 
+            For full-duplex, this is the greater of rxkB/S or txkB/s.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSClientActivity.CallPerSec">
+            <summary>
+            Number of RPC requests made per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSClientActivity.RetransPerSec">
+            <summary>
+            Number of RPC requests per second, those which needed to be retransmitted (for example because of a server timeout).
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSClientActivity.ReadPerSec">
+            <summary>
+            Number of 'read' RPC calls made per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSClientActivity.WritePerSec">
+            <summary>
+            Number of 'write' RPC calls made per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSClientActivity.AccessPerSec">
+            <summary>
+            Number of 'access' RPC calls made per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSClientActivity.GetattPerSec">
+            <summary>
+            Number of 'getattr' RPC calls made per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.ScallPerSec">
+            <summary>
+            Number of RPC requests received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.BadcallPerSec">
+            <summary>
+            Number of bad RPC requests received per second, those whose processing generated an error.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.PacketPerSec">
+            <summary>
+            Number of network packets received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.UdpPerSec">
+            <summary>
+            Number of UDP packets received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.TcpPerSec">
+            <summary>
+            Number of TCP packets received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.HitPerSEc">
+            <summary>
+            Number of reply cache hits per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.MissPerSec">
+            <summary>
+            Number of reply cache misses per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.SreadPerSec">
+            <summary>
+            Number of 'read' RPC calls received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.SwritePerSec">
+            <summary>
+            Number of 'write' RPC calls received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.SaccessPerSec">
+            <summary>
+            Number of 'access' RPC calls received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.NFSServerActivity.SgetattPerSec">
+            <summary>
+            Number of 'getattr' RPC calls received per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.PgpginPerSec">
+            <summary>
+            Total number of kilobytes the system paged in from disk per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.PgpgoutPerSec">
+            <summary>
+            Total number of kilobytes the system paged out to disk per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.FaultPerSec">
+            <summary>
+            Number of page faults (major + minor) made by the system per second.  This is not a count of page faults that generate I/O, because some page faults can be resolved without I/O.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.MajfltPerSec">
+            <summary>
+            Number of major faults the system has made per second, those which have required loading a memory page from disk.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.PgfreePerSec">
+            <summary>
+            Number of pages placed on the free list by the system per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.PgscankPerSec">
+            <summary>
+            Number of pages scanned by the kswapd daemon per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.PgscandPerSec">
+            <summary>
+            Number of pages scanned directly per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.PgstealPerSec">
+            <summary>
+            Number of pages the system has reclaimed from cache (pagecache and swapcache) per second to satisfy its memory demands.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.PagingStatistics.Vmeff">
+            <summary>
+            Calculated as pgsteal / pgscan, this is a metric of the efficiency of page reclaim. If it is near 100% then almost every page coming off the tail of the inactive list is being reaped. 
+            If it gets too low (e.g. less than 30%) then the virtual memory is having some difficulty.  This field is displayed as zero if no pages have been scanned during the interval of time.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.QueueLoadStatistics.Runqsz">
+            <summary>
+            Run queue length (number of tasks waiting for run time).
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.QueueLoadStatistics.Plistsz">
+            <summary>
+            Number of tasks in the task list.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.QueueLoadStatistics.Ldavg1">
+            <summary>
+            System load average for the last minute.  The load average is calculated as the average number of runnable or running tasks (R state), 
+            and the number of tasks in uninterruptible sleep (D state) over the specified interval.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.QueueLoadStatistics.Ldavg5">
+            <summary>
+            System load average for the past 5 minutes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.QueueLoadStatistics.Ldavg15">
+            <summary>
+            System load average for the past 15 minutes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.QueueLoadStatistics.Blocked">
+            <summary>
+            Number of tasks currently blocked, waiting for I/O to complete.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SocketStatistics.Totsck">
+            <summary>
+            Total number of sockets used by the system.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SocketStatistics.Tcpsck">
+            <summary>
+            Number of TCP sockets currently in use.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SocketStatistics.Udpsck">
+            <summary>
+            Number of UDP sockets currently in use.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SocketStatistics.Rawsck">
+            <summary>
+            Number of RAW sockets currently in use.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SocketStatistics.Ipfrag">
+            <summary>
+            Number of IP fragments currently in queue.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SocketStatistics.Tcptw">
+            <summary>
+            Number of TCP sockets in TIME_WAIT state.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SoftwareNetwork.TotalPerSec">
+            <summary>
+            The total number of network frames processed per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SoftwareNetwork.DropdPerSec">
+            <summary>
+            The total number of network frames dropped per second because there was no room on the processing queue.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SoftwareNetwork.SqueezdPerSec">
+            <summary>
+            The number of times the softirq handler function terminated per second because its budget was consumed or the time limit was reached, but more work could have been done.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SoftwareNetwork.Rx_rpsPerSec">
+            <summary>
+            The number of times the CPU has been woken up per second to process packets via an inter-processor interrupt.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SoftwareNetwork.Flw_limPerSec">
+            <summary>
+            The number of times the flow limit has been reached per second.  Flow limiting is an optional RPS feature that can be used to limit the number of packets queued to the backlog for each flow to a certain amount.  
+            This can help ensure that smaller flows are processed even though much larger flows are pushing packets in.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SwappingStatistics.PSwpinPerSec">
+            <summary>
+            Total number of swap pages the system brought in per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SwappingStatistics.PSwpoutPerSec">
+            <summary>
+            Total number of swap pages the system brought out per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SwapSpaceUtilization.Kbswpfree">
+            <summary>
+            Amount of free swap space in kilobytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SwapSpaceUtilization.Kbswpused">
+            <summary>
+            Amount of used swap space in kilobytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SwapSpaceUtilization.Swpused">
+            <summary>
+            Percentage of used swap space.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SwapSpaceUtilization.Kbswpcad">
+            <summary>
+            Amount of cached swap memory in kilobytes.  This is memory that once was swapped out, is swapped back in but still also is in the swap area 
+            (if memory is needed it doesn't need to be swapped out again because it is already in the swap area. This saves I/O).
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.SwapSpaceUtilization.Swpcad">
+            <summary>
+            Percentage of cached swap memory in relation to the amount of used swap space.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TaskCreationSwitching.ProcPerSec">
+            <summary>
+            Total number of tasks created per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TaskCreationSwitching.CSwchPerSec">
+            <summary>
+            Total number of context switches per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TransferRateStatistics.Tps">
+            <summary>
+            Total number of transfers per second that were issued to physical devices.  A transfer is an I/O request to a physical device. 
+            Multiple logical requests can be combined into a single I/O request to the device.  A transfer is of indeterminate size.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TransferRateStatistics.Rtps">
+            <summary>
+            Total number of read requests per second issued to physical devices.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TransferRateStatistics.Wtps">
+            <summary>
+            Total number of write requests per second issued to physical devices.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TransferRateStatistics.Dtps">
+            <summary>
+            Total number of discard requests per second issued to physical devices.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TransferRateStatistics.BreadPerSec">
+            <summary>
+            Total amount of data read from the devices in blocks per second.  Blocks are equivalent to sectors and therefore have a size of 512 bytes.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TransferRateStatistics.BwrtnPerSec">
+            <summary>
+            Total amount of data written to devices in blocks per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TransferRateStatistics.BdscdPerSec">
+            <summary>
+            Total amount of data discarded for devices in blocks per second.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TTYDeviceActivity.RcvinPerSec">
+            <summary>
+            Number of receive interrupts per second for current serial line. Serial line number is given in the TTY column.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TTYDeviceActivity.TxmtinPerSec">
+            <summary>
+            Number of transmit interrupts per second for current serial line.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TTYDeviceActivity.FramerrPerSec">
+            <summary>
+            Number of frame errors per second for current serial line.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TTYDeviceActivity.PrtyerrPerSec">
+            <summary>
+            Number of parity errors per second for current serial line.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TTYDeviceActivity.BrkPerSec">
+            <summary>
+            Number of breaks per second for current serial line.
+            </summary>
+        </member>
+        <member name="P:SYSSTATS_Charter.TTYDeviceActivity.OvrunPerSec">
+            <summary>
+            Number of overrun errors per second for current serial line.
+            </summary>
+        </member>
+        <member name="F:SYSSTATS_Charter.SYSSTAT_Form.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SYSSTATS_Charter.SYSSTAT_Form.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SYSSTATS_Charter.SYSSTAT_Form.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>
