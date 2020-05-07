@@ -31,7 +31,7 @@ namespace SYSSTATS_Charter
 
                 if (report != null)
                 {
-                    result.Add(report.Item1, report.Item2);
+                    result.Add(report.Item1, report.Item2.OrderBy(x => x.TimeStamp).ToList());
                 }
             }
 

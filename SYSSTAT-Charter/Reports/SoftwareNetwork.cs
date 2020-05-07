@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -61,37 +62,41 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new SoftwareNetwork();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if(!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
-                    switch (tags[i])
+                    var newValues = new SoftwareNetwork();
+
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "CPU":
-                            newValues.CPU = vals[index];
-                            break;
-                        case "total/s":
-                            newValues.TotalPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "dropd/s":
-                            newValues.DropdPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "squeezd/s":
-                            newValues.SqueezdPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rx_rps/s":
-                            newValues.Rx_rpsPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "flw_lim/s":
-                            newValues.Flw_limPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+                        switch (tags[i])
+                        {
+                            case "CPU":
+                                newValues.CPU = vals[index];
+                                break;
+                            case "total/s":
+                                newValues.TotalPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "dropd/s":
+                                newValues.DropdPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "squeezd/s":
+                                newValues.SqueezdPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rx_rps/s":
+                                newValues.Rx_rpsPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "flw_lim/s":
+                                newValues.Flw_limPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }
