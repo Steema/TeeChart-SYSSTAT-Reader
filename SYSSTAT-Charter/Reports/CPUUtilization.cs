@@ -37,56 +37,60 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new CPUUtilization();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new CPUUtilization();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "CPU":
-                            newValues.CPU = vals[index];
-                            break;
-                        case "%usr":
-                            newValues.Usr = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%nice":
-                            newValues.Nice = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%system":
-                            newValues.System = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%sys":
-                            newValues.Sys = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%iowait":
-                            newValues.IOWait = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%steal":
-                            newValues.Steal = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%irq":
-                            newValues.IRQ = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%soft":
-                            newValues.Soft = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%guest":
-                            newValues.Guest = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%gnice":
-                            newValues.Gnice = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%idle":
-                            newValues.Idle = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "CPU":
+                                newValues.CPU = vals[index];
+                                break;
+                            case "%usr":
+                                newValues.Usr = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%nice":
+                                newValues.Nice = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%system":
+                                newValues.System = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%sys":
+                                newValues.Sys = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%iowait":
+                                newValues.IOWait = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%steal":
+                                newValues.Steal = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%irq":
+                                newValues.IRQ = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%soft":
+                                newValues.Soft = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%guest":
+                                newValues.Guest = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%gnice":
+                                newValues.Gnice = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%idle":
+                                newValues.Idle = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

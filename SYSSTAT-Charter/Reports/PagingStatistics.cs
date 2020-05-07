@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -83,47 +84,51 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new PagingStatistics();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new PagingStatistics();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "pgpgin/s":
-                            newValues.PgpginPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "pgpgout/s":
-                            newValues.PgpgoutPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "fault/s":
-                            newValues.FaultPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "majflt/s":
-                            newValues.MajfltPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "pgfree/s":
-                            newValues.PgfreePerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "pgscank/s":
-                            newValues.PgscankPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "pgscand/s":
-                            newValues.PgscandPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "pgsteal/s":
-                            newValues.PgstealPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%vmeff":
-                            newValues.Vmeff = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "pgpgin/s":
+                                newValues.PgpginPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "pgpgout/s":
+                                newValues.PgpgoutPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "fault/s":
+                                newValues.FaultPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "majflt/s":
+                                newValues.MajfltPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "pgfree/s":
+                                newValues.PgfreePerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "pgscank/s":
+                                newValues.PgscankPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "pgscand/s":
+                                newValues.PgscandPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "pgsteal/s":
+                                newValues.PgstealPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%vmeff":
+                                newValues.Vmeff = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

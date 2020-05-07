@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -82,47 +83,52 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new BlockDeviceActivity();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new BlockDeviceActivity();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "DEV":
-                            newValues.DEV = vals[index];
-                            break;
-                        case "tps":
-                            newValues.Tps = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rkB/s":
-                            newValues.RkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "wkB/s":
-                            newValues.WkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "dkB/s":
-                            newValues.DkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "areq-sz":
-                            newValues.Areqsz = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "aqu-sz":
-                            newValues.Aqusz = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "await":
-                            newValues.Await = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%util":
-                            newValues.Util = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "DEV":
+                                newValues.DEV = vals[index];
+                                break;
+                            case "tps":
+                                newValues.Tps = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rkB/s":
+                                newValues.RkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "wkB/s":
+                                newValues.WkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "dkB/s":
+                                newValues.DkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "areq-sz":
+                                newValues.Areqsz = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "aqu-sz":
+                                newValues.Aqusz = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "await":
+                                newValues.Await = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%util":
+                                newValues.Util = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
+
             }
             return result;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -64,38 +65,42 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new QueueLoadStatistics();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new QueueLoadStatistics();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "runq-sz":
-                            newValues.Runqsz = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "plist-sz":
-                            newValues.Plistsz = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "ldavg-1":
-                            newValues.Ldavg1 = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "ldavg-5":
-                            newValues.Ldavg5 = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "ldavg-15":
-                            newValues.Ldavg15 = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "blocked":
-                            newValues.Blocked = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "runq-sz":
+                                newValues.Runqsz = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "plist-sz":
+                                newValues.Plistsz = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "ldavg-1":
+                                newValues.Ldavg1 = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "ldavg-5":
+                                newValues.Ldavg5 = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "ldavg-15":
+                                newValues.Ldavg15 = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "blocked":
+                                newValues.Blocked = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

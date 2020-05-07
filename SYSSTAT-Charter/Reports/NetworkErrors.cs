@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -85,49 +86,54 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new NetworkErrors();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
-                    switch (tags[i])
+                    var newValues = new NetworkErrors();
+
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "IFACE":
-                            newValues.IFACE = vals[index];
-                            break;
-                        case "rxerr/s":
-                            newValues.RxerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txerr/s":
-                            newValues.TxerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "coll/s":
-                            newValues.CollPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rxdrop/s":
-                            newValues.RxdropPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txdrop/s":
-                            newValues.TxdropPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txcarr/s":
-                            newValues.TxcarrPerSEc = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rxfram/s":
-                            newValues.RxframPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rxfifo/s":
-                            newValues.RxfifoPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txfifo/s":
-                            newValues.TxfifoPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+                        switch (tags[i])
+                        {
+                            case "IFACE":
+                                newValues.IFACE = vals[index];
+                                break;
+                            case "rxerr/s":
+                                newValues.RxerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txerr/s":
+                                newValues.TxerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "coll/s":
+                                newValues.CollPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rxdrop/s":
+                                newValues.RxdropPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txdrop/s":
+                                newValues.TxdropPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txcarr/s":
+                                newValues.TxcarrPerSEc = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rxfram/s":
+                                newValues.RxframPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rxfifo/s":
+                                newValues.RxfifoPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txfifo/s":
+                                newValues.TxfifoPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
+
             }
             return result;
         }

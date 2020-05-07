@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -58,35 +59,39 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new SwapSpaceUtilization();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new SwapSpaceUtilization();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "kbswpfree":
-                            newValues.Kbswpfree = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbswpused":
-                            newValues.Kbswpused = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%swpused":
-                            newValues.Swpused = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbswpcad":
-                            newValues.Kbswpcad = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%swpcad":
-                            newValues.Swpcad = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "kbswpfree":
+                                newValues.Kbswpfree = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbswpused":
+                                newValues.Kbswpused = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%swpused":
+                                newValues.Swpused = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbswpcad":
+                                newValues.Kbswpcad = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%swpcad":
+                                newValues.Swpcad = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

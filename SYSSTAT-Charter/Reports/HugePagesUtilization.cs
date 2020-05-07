@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -57,35 +58,39 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new HugePagesUtilization();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new HugePagesUtilization();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "kbhugfree":
-                            newValues.Kbhugfree = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbhugused":
-                            newValues.Kbhugused = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%hugused":
-                            newValues.Hugused = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbhugrsvd":
-                            newValues.Kbhugrsvd = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbhugsurp":
-                            newValues.Kbhugsurp = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "kbhugfree":
+                                newValues.Kbhugfree = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbhugused":
+                                newValues.Kbhugused = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%hugused":
+                                newValues.Hugused = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbhugrsvd":
+                                newValues.Kbhugrsvd = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbhugsurp":
+                                newValues.Kbhugsurp = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

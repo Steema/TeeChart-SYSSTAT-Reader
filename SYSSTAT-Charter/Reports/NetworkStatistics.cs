@@ -35,46 +35,50 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new NetworkStatistics();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
-                    switch (tags[i])
+                    var newValues = new NetworkStatistics();
+
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "IFACE":
-                            newValues.IFACE = vals[index];
-                            break;
-                        case "rxpck/s":
-                            newValues.RxpckPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txpck/s":
-                            newValues.TxpckPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rxkB/s":
-                            newValues.RxkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txkB/s":
-                            newValues.TxkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rxcmp/s":
-                            newValues.RxcmpPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txcmp/s":
-                            newValues.TxcmpPerSEc = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rxmcst/s":
-                            newValues.RxmcstPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%ifutil":
-                            newValues.Ifutil = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+                        switch (tags[i])
+                        {
+                            case "IFACE":
+                                newValues.IFACE = vals[index];
+                                break;
+                            case "rxpck/s":
+                                newValues.RxpckPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txpck/s":
+                                newValues.TxpckPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rxkB/s":
+                                newValues.RxkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txkB/s":
+                                newValues.TxkBPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rxcmp/s":
+                                newValues.RxcmpPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txcmp/s":
+                                newValues.TxcmpPerSEc = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rxmcst/s":
+                                newValues.RxmcstPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%ifutil":
+                                newValues.Ifutil = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -94,52 +95,56 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new NFSServerActivity();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
-                    switch (tags[i])
+                    var newValues = new NFSServerActivity();
+
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "scall/s":
-                            newValues.ScallPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "badcall/s":
-                            newValues.BadcallPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "packet/s":
-                            newValues.PacketPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "udp/s":
-                            newValues.UdpPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "tcp/s":
-                            newValues.TcpPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "hit/s":
-                            newValues.HitPerSEc = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "miss/s":
-                            newValues.MissPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "sread/s":
-                            newValues.SreadPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "swrite/s":
-                            newValues.SwritePerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "saccess/s":
-                            newValues.SaccessPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "sgetatt/s":
-                            newValues.SgetattPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+                        switch (tags[i])
+                        {
+                            case "scall/s":
+                                newValues.ScallPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "badcall/s":
+                                newValues.BadcallPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "packet/s":
+                                newValues.PacketPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "udp/s":
+                                newValues.UdpPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "tcp/s":
+                                newValues.TcpPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "hit/s":
+                                newValues.HitPerSEc = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "miss/s":
+                                newValues.MissPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "sread/s":
+                                newValues.SreadPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "swrite/s":
+                                newValues.SwritePerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "saccess/s":
+                                newValues.SaccessPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "sgetatt/s":
+                                newValues.SgetattPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

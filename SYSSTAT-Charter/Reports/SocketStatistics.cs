@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 
@@ -64,37 +65,41 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new SocketStatistics();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
-                    switch (tags[i])
+                    var newValues = new SocketStatistics();
+
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "totsck":
-                            newValues.Totsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "tcpsck":
-                            newValues.Tcpsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "udpsck":
-                            newValues.Udpsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "rawsck":
-                            newValues.Rawsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "ip-frag":
-                            newValues.Ipfrag = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "tcp-tw":
-                            newValues.Tcptw = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+                        switch (tags[i])
+                        {
+                            case "totsck":
+                                newValues.Totsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "tcpsck":
+                                newValues.Tcpsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "udpsck":
+                                newValues.Udpsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "rawsck":
+                                newValues.Rawsck = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "ip-frag":
+                                newValues.Ipfrag = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "tcp-tw":
+                                newValues.Tcptw = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

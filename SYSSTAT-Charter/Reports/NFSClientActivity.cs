@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -63,37 +64,41 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new NFSClientActivity();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
-                    switch (tags[i])
+                    var newValues = new NFSClientActivity();
+
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "call/s":
-                            newValues.CallPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "retrans/s":
-                            newValues.RetransPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "read/s":
-                            newValues.ReadPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "write/s":
-                            newValues.WritePerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "access/s":
-                            newValues.AccessPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "getatt/s":
-                            newValues.GetattPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+                        switch (tags[i])
+                        {
+                            case "call/s":
+                                newValues.CallPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "retrans/s":
+                                newValues.RetransPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "read/s":
+                                newValues.ReadPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "write/s":
+                                newValues.WritePerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "access/s":
+                                newValues.AccessPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "getatt/s":
+                                newValues.GetattPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

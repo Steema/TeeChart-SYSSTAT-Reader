@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -127,68 +128,72 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new MemoryUtilization();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new MemoryUtilization();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "kbmemfree":
-                            newValues.Kbmemfree = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbavail":
-                            newValues.Kbavail = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbmemused":
-                            newValues.Kbmemused = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%memused":
-                            newValues.Memused = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbbuffers":
-                            newValues.Kbbuffers = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbcached":
-                            newValues.Kbcached = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbcommit":
-                            newValues.Kbcommit = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "%commit":
-                            newValues.Commit = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbactive":
-                            newValues.Kbactive = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbinact":
-                            newValues.Kbinact = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbdirty":
-                            newValues.Kbdirty = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbanonpg":
-                            newValues.Kbanonpg = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbslab":
-                            newValues.Kbslab = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbkstack":
-                            newValues.Kbkstack = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbpgtbl":
-                            newValues.Kbpgtbl = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "kbvmused":
-                            newValues.Kbvmused = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "kbmemfree":
+                                newValues.Kbmemfree = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbavail":
+                                newValues.Kbavail = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbmemused":
+                                newValues.Kbmemused = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%memused":
+                                newValues.Memused = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbbuffers":
+                                newValues.Kbbuffers = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbcached":
+                                newValues.Kbcached = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbcommit":
+                                newValues.Kbcommit = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "%commit":
+                                newValues.Commit = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbactive":
+                                newValues.Kbactive = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbinact":
+                                newValues.Kbinact = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbdirty":
+                                newValues.Kbdirty = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbanonpg":
+                                newValues.Kbanonpg = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbslab":
+                                newValues.Kbslab = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbkstack":
+                                newValues.Kbkstack = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbpgtbl":
+                                newValues.Kbpgtbl = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "kbvmused":
+                                newValues.Kbvmused = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

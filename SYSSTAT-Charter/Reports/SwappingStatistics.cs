@@ -26,25 +26,29 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new SwappingStatistics();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
-                    switch (tags[i])
+                    var newValues = new SwappingStatistics();
+
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "pswpin/s":
-                            newValues.PSwpinPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "pswpout/s":
-                            newValues.PSwpoutPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+                        switch (tags[i])
+                        {
+                            case "pswpin/s":
+                                newValues.PSwpinPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "pswpout/s":
+                                newValues.PSwpoutPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }

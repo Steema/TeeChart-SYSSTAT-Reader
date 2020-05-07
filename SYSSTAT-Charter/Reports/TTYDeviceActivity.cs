@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace SYSSTATS_Charter
@@ -66,41 +67,45 @@ namespace SYSSTATS_Charter
 
             foreach (var item in values)
             {
-                var newValues = new TTYDeviceActivity();
-
                 var vals = item.Split(';');
-                newValues.FillCommonTags(vals);
 
-                for (var i = 0; i < tags.Length; i++)
+                if (!vals.Any(x => x.StartsWith("LINUX-RESTART")))
                 {
-                    var index = i + 3;
+                    var newValues = new TTYDeviceActivity();
 
-                    switch (tags[i])
+                    newValues.FillCommonTags(vals);
+
+                    for (var i = 0; i < tags.Length; i++)
                     {
-                        case "TTY":
-                            newValues.TTY = vals[index];
-                            break;
-                        case "rcvin/s":
-                            newValues.RcvinPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "txmtin/s":
-                            newValues.TxmtinPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "framerr/s":
-                            newValues.FramerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "prtyerr/s":
-                            newValues.PrtyerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "brk/s":
-                            newValues.BrkPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
-                        case "ovrun/s":
-                            newValues.OvrunPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
-                            break;
+                        var index = i + 3;
+
+                        switch (tags[i])
+                        {
+                            case "TTY":
+                                newValues.TTY = vals[index];
+                                break;
+                            case "rcvin/s":
+                                newValues.RcvinPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "txmtin/s":
+                                newValues.TxmtinPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "framerr/s":
+                                newValues.FramerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "prtyerr/s":
+                                newValues.PrtyerrPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "brk/s":
+                                newValues.BrkPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                            case "ovrun/s":
+                                newValues.OvrunPerSec = double.Parse(vals[index], CultureInfo.InvariantCulture);
+                                break;
+                        }
                     }
+                    result.Add(newValues);
                 }
-                result.Add(newValues);
             }
             return result;
         }
