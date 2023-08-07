@@ -51,9 +51,9 @@ namespace SYSSTATS_Charter
                     return true;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             reports = null;
             return false;

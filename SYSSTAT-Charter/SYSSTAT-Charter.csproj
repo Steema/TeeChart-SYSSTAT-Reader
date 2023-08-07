@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>SYSSTATS_Charter</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Steema.TeeChart.NETCore.WinForm" Version="4.2020.4.7" />
+    <PackageReference Include="Steema.TeeChart.NET" Version="4.2023.8.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -29,7 +29,7 @@ namespace SYSSTATS_Charter
             _tChart1.Axes.Bottom.Labels.Angle = 90;
             _tChart1.Axes.Bottom.Labels.DateTimeFormat = "g";
             _tChart1.Axes.Right.Grid.Transparency = 50;
-            _tChart1.Axes.Right.Grid.Style = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            _tChart1.Axes.Right.Grid.Style = DashStyle.DashDotDot;
             _tChart1.Axes.Right.Title.Font = _tChart1.Axes.Bottom.Title.Font;
             _tChart1.Axes.Right.Title.Text = "% Percentage";
             _tChart1.Axes.Right.Title.Angle = 90;
@@ -45,7 +45,7 @@ namespace SYSSTATS_Charter
             splitContainer1.Panel2.Controls.Add(_tChart1);
         }
 
-        private void _tChart1_AfterDraw(object sender, Graphics3D g)
+        private void _tChart1_AfterDraw(object sender, IGraphics3D g)
         {
             if(_tChart1.Series.Count > 0)
             {
@@ -55,7 +55,7 @@ namespace SYSSTATS_Charter
             }
         }
 
-        private void _tChart1_MouseMove(object sender, MouseEventArgs e)
+        private void _tChart1_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if(cbMouseOver.Checked)
             {
@@ -221,7 +221,7 @@ namespace SYSSTATS_Charter
                             Title = tag + minMax
                         };
 
-                        line.LinePen.Style = (System.Drawing.Drawing2D.DashStyle)(_tChart1.Series.Count % 4);
+                        line.LinePen.Style = (DashStyle)(_tChart1.Series.Count % 4);
                         line.LinePen.Width = 2;
                         line.XValues.DateTime = true;
                         line.Add(dates.ToArray(), valors.ToArray());
